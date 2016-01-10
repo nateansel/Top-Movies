@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import MBProgressHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -16,6 +17,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
   // MARK: - Properties
   var movies = [NSDictionary]?()
   var filteredMovies = [NSDictionary]?()
+  
+  var refreshControl: UIRefreshControl!
+  var hud: MBProgressHUD!
   
   
   
@@ -29,6 +33,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     tableView.dataSource = self
     tableView.delegate = self
     
+    refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
+    tableView.insertSubview(refreshControl, atIndex: 0)
+    
+    hud = MBProgressHUD.showHUDAddedTo(tableView, animated: true)
+    hud.mode = .Indeterminate
+    hud.labelText = "Loading"
+    hud.removeFromSuperViewOnHide = true
     refreshData()
   }
   
@@ -97,8 +109,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
               self.filteredMovies = results
               self.tableView.reloadData()
               NSLog("response: \(responseDictionary)")
+              self.hud.hide(true)
           }
         }
+        else {
+          
+        }
+        self.refreshControl.endRefreshing()
     });
     task.resume()
   }
