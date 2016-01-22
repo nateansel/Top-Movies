@@ -37,9 +37,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="170" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8UQ-tu-lxb">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="J7P-p2-y2i">
+                                    <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="movieCell" rowHeight="168" id="mO3-2G-OtQ" customClass="CustomTableViewCell" customModule="Top_Movies" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="168"/>
+                                        <rect key="frame" x="0.0" y="136" width="600" height="168"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mO3-2G-OtQ" id="6XY-0R-awQ">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="167"/>
@@ -57,7 +62,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XnU-Z8-8Bi">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XnU-Z8-8Bi">
                                                     <rect key="frame" x="8" y="8" width="108" height="151"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="108" id="Icb-Jp-3aF"/>
@@ -97,6 +102,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="YXq-Wo-PM8"/>
                     <connections>
+                        <outlet property="searchBar" destination="J7P-p2-y2i" id="k4M-7W-xkd"/>
                         <outlet property="tableView" destination="8UQ-tu-lxb" id="NSd-aH-TRr"/>
                     </connections>
                 </viewController>

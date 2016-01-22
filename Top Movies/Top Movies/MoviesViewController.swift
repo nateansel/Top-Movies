@@ -10,16 +10,17 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var searchBar: UISearchBar!
   
   // MARK: - Properties
   var movies = [NSDictionary]?()
   var filteredMovies = [NSDictionary]?()
   
   var refreshControl: UIRefreshControl!
-  var hud: MBProgressHUD!
+  var hud:            MBProgressHUD!
   
   
   
@@ -31,7 +32,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     // Do any additional setup after loading the view, typically from a nib.
     
     tableView.dataSource = self
-    tableView.delegate = self
+    tableView.delegate   = self
+    searchBar.delegate   = self
     
     refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -62,7 +64,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     let title = filteredMovies![indexPath.row]["title"] as! String
     let overview = filteredMovies![indexPath.row]["overview"] as! String
-    let imageUrl = NSURL(string:"https://image.tmdb.org/t/p/w342" + (movies![indexPath.row]["poster_path"] as! String))
+    let imageUrl = NSURL(string:"https://image.tmdb.org/t/p/w342" + (filteredMovies![indexPath.row]["poster_path"] as! String))
     
     cell.titleLabel.text = title
     cell.overviewLabel.text = overview
@@ -118,5 +120,21 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         self.refreshControl.endRefreshing()
     });
     task.resume()
+  }
+  
+  
+  
+  
+  
+  
+  // MARK: - Search Bar Delegate
+  func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    filteredMovies = movies
+    if searchText != "" {
+      filteredMovies = movies!.filter({(movie: NSDictionary) -> Bool in
+        (movie["title"] as! String).lowercaseString.containsString(searchText.lowercaseString)
+      })
+    }
+    tableView.reloadData()
   }
 }
