@@ -1,8 +1,8 @@
 //
-//  MoviesViewController.swift
+//  TopMoviesAsCollectionViewController.swift
 //  Top Movies
 //
-//  Created by Nathan Ansel on 1/7/16.
+//  Created by Nathan Ansel on 1/24/16.
 //  Copyright © 2016 Nathan Ansel. All rights reserved.
 //
 
@@ -10,10 +10,15 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-
-  @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var searchBar: UISearchBar!
+class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout/*, UISearchBarDelegate */{
+//{
+  
+  @IBOutlet weak var collectionView: UICollectionView!
+//  @IBOutlet weak var searchBar: UISearchBar!
+  
+  
+  
+  
   
   // MARK: - Properties
   var movies = [NSDictionary]?()
@@ -31,16 +36,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
-    tableView.dataSource = self
-    tableView.delegate   = self
-    searchBar.delegate   = self
+    collectionView.dataSource = self
+    collectionView.delegate   = self
+//    searchBar.delegate        = self
     
     refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
-    tableView.insertSubview(refreshControl, atIndex: 0)
+    refreshControl.layer.zPosition = -1
+    collectionView.insertSubview(refreshControl, atIndex: 0)
     
-    hud = MBProgressHUD.showHUDAddedTo(tableView, animated: true)
-    hud.mode = .Indeterminate
+    hud           = MBProgressHUD.showHUDAddedTo(collectionView, animated: true)
+    hud.mode      = .Indeterminate
     hud.labelText = "Loading"
     hud.removeFromSuperViewOnHide = true
     refreshData()
@@ -49,7 +55,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
   
   
   
-
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -59,15 +65,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
   
   
   // MARK: Table view overrides
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("movieCell", forIndexPath: indexPath) as! CustomTableViewCell
+  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCollectionViewCell", forIndexPath: indexPath) as! MovieCollectionViewCell
     
-    let title = filteredMovies![indexPath.row]["title"] as! String
-    let overview = filteredMovies![indexPath.row]["overview"] as! String
+//    let title    = filteredMovies![indexPath.row]["title"] as! String
+//    let overview = filteredMovies![indexPath.row]["overview"] as! String
     let imageUrl = NSURL(string:"https://image.tmdb.org/t/p/w342" + (filteredMovies![indexPath.row]["poster_path"] as! String))
-    
-    cell.titleLabel.text = title
-    cell.overviewLabel.text = overview
+//    
+//    cell.titleLabel.text    = title
+//    cell.overviewLabel.text = overview
     cell.posterView.setImageWithURL(imageUrl!)
     return cell
   }
@@ -76,11 +82,21 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
   
   
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if let numRows = filteredMovies?.count {
       return numRows
     }
     return 0
+  }
+  
+  
+  
+  
+  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    let aspectRatio = CGFloat(300) / CGFloat(444)
+    let width = view.frame.size.width / 3
+    let height = width / aspectRatio
+    return CGSizeMake(width, height)
   }
   
   
@@ -109,13 +125,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
               let results = responseDictionary["results"] as! [NSDictionary]
               self.movies = results
               self.filteredMovies = results
-              self.tableView.reloadData()
+              self.collectionView.reloadData()
               NSLog("response: \(responseDictionary)")
               self.hud.hide(true)
           }
         }
         else {
-          
+          print("failed responce")
         }
         self.refreshControl.endRefreshing()
     });
@@ -127,6 +143,19 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
   
   
   
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "toDetailView" {
+      let destinationViewController = segue.destinationViewController as! DetailViewController
+      let cell = sender as! MovieCollectionViewCell
+      destinationViewController.movieImage = cell.posterView.image
+    }
+  }
+  
+  
+  
+  
+  
+  /*
   // MARK: - Search Bar Delegate
   func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
     filteredMovies = movies
@@ -135,6 +164,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         (movie["title"] as! String).lowercaseString.containsString(searchText.lowercaseString)
       })
     }
-    tableView.reloadData()
+    collectionView.reloadData()
   }
+*/
+
 }

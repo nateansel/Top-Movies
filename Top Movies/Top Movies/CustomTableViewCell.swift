@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// test
 class CustomTableViewCell: UITableViewCell {
   
   @IBOutlet weak var titleLabel: UILabel!
