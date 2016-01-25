@@ -1,4 +1,4 @@
-# Project 1 - *Top Movies*
+# Project 1 - *Top Movies* 
 
 **Top Movies** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
@@ -6,7 +6,7 @@ Time spent: **10** hours spent in total
 
 ## User Stories
 
-The following **required** functionality is complete:
+The following **required** functionality is complete:x
 
 - [x] User can view a list of movies currently playing in theaters from The Movie Database.
 - [x] Poster images are loaded using the UIImageView category in the AFNetworking library.
