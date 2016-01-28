@@ -189,6 +189,7 @@
 				D892EE1F1C3F5CB60040BBAB /* Resources */,
 				F59FA1D5E3F46669BE41A25C /* Embed Pods Frameworks */,
 				76AC4F24EB6E21B16102AA9F /* Copy Pods Resources */,
+				D80555461C57151E0006622F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -338,6 +339,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Top Movies/Pods-Top Movies-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		D80555461C57151E0006622F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"";
 		};
 		F59FA1D5E3F46669BE41A25C /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

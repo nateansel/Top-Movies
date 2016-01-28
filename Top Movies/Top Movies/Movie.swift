@@ -9,34 +9,28 @@
 import Foundation
 
 class Movie {
-  var title: String
+  var title:       String
   var description: String
-  var posterPath: String
+  var posterPath:  String
   var releaseDate: NSDate
+  var imageURL:    NSURL
   
-  init(title: String, description: String, posterPath: String, releaseDateString: String) {
-    self.title       = title
-    self.description = description
-    self.posterPath  = posterPath
-    
-    let formatter = NSDateFormatter()
-    formatter.dateFormat = "yyyy-m-dd"
-    if let date = formatter.dateFromString(releaseDateString) {
-      self.releaseDate = date
-    }
-    else {
-      self.releaseDate = NSDate()
+  init(title: String?, description: String?, posterPath: String?, releaseDateString: String?) {
+    self.title       = title ?? ""
+    self.description = description ?? ""
+    self.posterPath  = posterPath ?? ""
+    imageURL         = NSURL(string:"https://image.tmdb.org/t/p/w342" + self.posterPath) ?? NSURL()
+    self.releaseDate = NSDate()
+    if let s = releaseDateString {
+      let formatter = NSDateFormatter()
+      formatter.dateFormat = "yyyy-m-dd"
+      if let date = formatter.dateFromString(s) {
+        self.releaseDate = date
+      }
     }
   }
   
   convenience init() {
-    self.init(title: "", description: "", posterPath: "", releaseDateString: "")
-  }
-  
-  
-  
-  
-  func getPosterImage() {
-    return
+    self.init(title: nil, description: nil, posterPath: nil, releaseDateString: nil)
   }
 }

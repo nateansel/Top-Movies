@@ -11,18 +11,14 @@ import AFNetworking
 import MBProgressHUD
 
 class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout/*, UISearchBarDelegate */{
-//{
+
   
+  // MARK: - Properties
   @IBOutlet weak var collectionView: UICollectionView!
 //  @IBOutlet weak var searchBar: UISearchBar!
   
-  
-  
-  
-  
-  // MARK: - Properties
   var movies = [NSDictionary]?()
-  var filteredMovies = [NSDictionary]?()
+  var filteredMovies = [Movie]?()
   
   var refreshControl: UIRefreshControl!
   var hud:            MBProgressHUD!
@@ -68,12 +64,7 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCollectionViewCell", forIndexPath: indexPath) as! MovieCollectionViewCell
     
-//    let title    = filteredMovies![indexPath.row]["title"] as! String
-//    let overview = filteredMovies![indexPath.row]["overview"] as! String
-    let imageUrl = NSURL(string:"https://image.tmdb.org/t/p/w342" + (filteredMovies![indexPath.row]["poster_path"] as! String))
-//    
-//    cell.titleLabel.text    = title
-//    cell.overviewLabel.text = overview
+    let imageUrl = NSURL(string:"https://image.tmdb.org/t/p/w342" + filteredMovies![indexPath.row].posterPath)
     cell.posterView.setImageWithURL(imageUrl!)
     return cell
   }
@@ -124,7 +115,7 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
             data, options:[]) as? NSDictionary {
               let results = responseDictionary["results"] as! [NSDictionary]
               self.movies = results
-              self.filteredMovies = results
+              self.makeMovieList(self.movies!)
               self.collectionView.reloadData()
               NSLog("response: \(responseDictionary)")
               self.hud.hide(true)
@@ -148,6 +139,20 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
       let destinationViewController = segue.destinationViewController as! DetailViewController
       let cell = sender as! MovieCollectionViewCell
       destinationViewController.movieImage = cell.posterView.image
+    }
+  }
+  
+  
+  
+  
+  
+  func makeMovieList(dictionaryList: [NSDictionary]) {
+    filteredMovies = [Movie]()
+    for dict in dictionaryList {
+      filteredMovies?.append(Movie(title: dict["title"] as? String,
+        description: dict["overview"] as? String,
+        posterPath: dict["poster_path"] as? String,
+        releaseDateString: dict["release_date"] as? String))
     }
   }
   

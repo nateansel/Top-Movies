@@ -134,16 +134,26 @@
                                     <constraint firstAttribute="width" constant="130" id="vu9-gN-eFi"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPf-dG-lEa">
+                                <rect key="frame" x="158" y="72" width="422" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="VPf-dG-lEa" firstAttribute="leading" secondItem="YLK-Hm-I85" secondAttribute="trailing" constant="8" id="4Aw-Vc-wnj"/>
                             <constraint firstItem="YLK-Hm-I85" firstAttribute="leading" secondItem="NzQ-ir-JID" secondAttribute="leadingMargin" id="Fun-n4-JeN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VPf-dG-lEa" secondAttribute="trailing" id="NTd-bl-hhE"/>
+                            <constraint firstItem="VPf-dG-lEa" firstAttribute="top" secondItem="8CO-W0-xgF" secondAttribute="bottom" constant="8" id="Yup-Q7-MWB"/>
                             <constraint firstItem="YLK-Hm-I85" firstAttribute="top" secondItem="8CO-W0-xgF" secondAttribute="bottom" constant="8" id="uK6-aY-Gic"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Movie Title" id="TJh-um-CHo"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="label" destination="VPf-dG-lEa" id="fpV-kA-FGq"/>
                         <outlet property="posterView" destination="YLK-Hm-I85" id="Upi-jd-TU2"/>
                     </connections>
                 </viewController>
@@ -179,8 +189,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="158" height="238"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PK2-0l-hRA">
-                                                    <rect key="frame" x="8" y="8" width="130" height="192.5"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PK2-0l-hRA">
+                                                    <rect key="frame" x="8" y="8" width="142" height="222"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -221,6 +231,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SY8-c2-Xgf"/>
+        <segue reference="wsG-6U-w4b"/>
     </inferredMetricsTieBreakers>
 </document>
