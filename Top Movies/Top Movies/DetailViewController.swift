@@ -10,16 +10,21 @@ import UIKit
 
 class DetailViewController: UIViewController {
   
-  var movieImage: UIImage? = UIImage()
   @IBOutlet weak var posterView: UIImageView!
-  @IBOutlet weak var label: UILabel!
+  @IBOutlet weak var movieTitle: UILabel!
+  @IBOutlet weak var overview: UILabel!
+  
+  var movie = Movie()
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    posterView.image = movieImage
-    label.font = UIFont.boldSystemFontOfSize(20)
+    navigationItem.title! = movie.title
+    posterView.setImageWithURL(movie.imageURL)
+    movieTitle!.text = movie.title
+    overview!.text = movie.description
+    
 
     // Do any additional setup after loading the view.
   }

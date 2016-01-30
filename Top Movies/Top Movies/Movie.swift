@@ -10,15 +10,18 @@ import Foundation
 
 class Movie {
   var title:       String
-  var description: String
+  var overview:    String
   var posterPath:  String
+  var rating:      Double
   var releaseDate: NSDate
   var imageURL:    NSURL
   
-  init(title: String?, description: String?, posterPath: String?, releaseDateString: String?) {
-    self.title       = title ?? ""
-    self.description = description ?? ""
+  
+  init(title: String?, overview: String?, rating: Double?, posterPath: String?, releaseDateString: String?) {
+    self.title       = title      ?? ""
+    self.overview    = overview   ?? ""
     self.posterPath  = posterPath ?? ""
+    self.rating      = rating     ?? 0
     imageURL         = NSURL(string:"https://image.tmdb.org/t/p/w342" + self.posterPath) ?? NSURL()
     self.releaseDate = NSDate()
     if let s = releaseDateString {
@@ -31,6 +34,6 @@ class Movie {
   }
   
   convenience init() {
-    self.init(title: nil, description: nil, posterPath: nil, releaseDateString: nil)
+    self.init(title: nil, overview: nil, rating: nil, posterPath: nil, releaseDateString: nil)
   }
 }

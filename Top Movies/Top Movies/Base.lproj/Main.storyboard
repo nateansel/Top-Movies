@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="I6q-Eb-KhB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="I6q-Eb-KhB">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -134,8 +134,14 @@
                                     <constraint firstAttribute="width" constant="130" id="vu9-gN-eFi"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPf-dG-lEa">
-                                <rect key="frame" x="158" y="72" width="422" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJJ-en-ZV5">
+                                <rect key="frame" x="158" y="145.5" width="422" height="119"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPf-dG-lEa">
+                                <rect key="frame" x="158" y="72" width="422" height="65.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -144,16 +150,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VPf-dG-lEa" firstAttribute="leading" secondItem="YLK-Hm-I85" secondAttribute="trailing" constant="8" id="4Aw-Vc-wnj"/>
+                            <constraint firstItem="wJJ-en-ZV5" firstAttribute="top" secondItem="VPf-dG-lEa" secondAttribute="bottom" constant="8" id="5Kz-9M-1v2"/>
+                            <constraint firstItem="wJJ-en-ZV5" firstAttribute="leading" secondItem="YLK-Hm-I85" secondAttribute="trailing" constant="8" id="Dps-Ec-pcG"/>
                             <constraint firstItem="YLK-Hm-I85" firstAttribute="leading" secondItem="NzQ-ir-JID" secondAttribute="leadingMargin" id="Fun-n4-JeN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VPf-dG-lEa" secondAttribute="trailing" id="NTd-bl-hhE"/>
                             <constraint firstItem="VPf-dG-lEa" firstAttribute="top" secondItem="8CO-W0-xgF" secondAttribute="bottom" constant="8" id="Yup-Q7-MWB"/>
                             <constraint firstItem="YLK-Hm-I85" firstAttribute="top" secondItem="8CO-W0-xgF" secondAttribute="bottom" constant="8" id="uK6-aY-Gic"/>
+                            <constraint firstItem="wJJ-en-ZV5" firstAttribute="trailing" secondItem="NzQ-ir-JID" secondAttribute="trailingMargin" id="zs4-l5-zpm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Movie Title" id="TJh-um-CHo"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="label" destination="VPf-dG-lEa" id="fpV-kA-FGq"/>
+                        <outlet property="movieTitle" destination="VPf-dG-lEa" id="4VB-Se-MTY"/>
+                        <outlet property="overview" destination="wJJ-en-ZV5" id="E6G-ge-6UV"/>
                         <outlet property="posterView" destination="YLK-Hm-I85" id="Upi-jd-TU2"/>
                     </connections>
                 </viewController>

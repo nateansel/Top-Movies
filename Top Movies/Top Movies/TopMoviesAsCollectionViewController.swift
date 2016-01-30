@@ -10,31 +10,33 @@ import UIKit
 import AFNetworking
 import MBProgressHUD
 
-class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout/*, UISearchBarDelegate */{
+class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
   
   // MARK: - Properties
   @IBOutlet weak var collectionView: UICollectionView!
-//  @IBOutlet weak var searchBar: UISearchBar!
+  var searchBar: UISearchBar!
   
   var movies = [NSDictionary]?()
   var filteredMovies = [Movie]?()
-  
   var refreshControl: UIRefreshControl!
   var hud:            MBProgressHUD!
-  
-  
   
   
   // MARK: - Methods
   // MARK: View controller overrides
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    searchBar = UISearchBar()
+    searchBar.showsCancelButton = false
+    searchBar.barStyle = .BlackTranslucent
+    navigationItem.titleView = searchBar
+    
     
     collectionView.dataSource = self
     collectionView.delegate   = self
-//    searchBar.delegate        = self
+    searchBar.delegate        = self
     
     refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
@@ -122,7 +124,7 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
           }
         }
         else {
-          print("failed responce")
+          print("failed response")
         }
         self.refreshControl.endRefreshing()
     });
@@ -135,10 +137,12 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    searchBar.endEditing(true)
     if segue.identifier == "toDetailView" {
       let destinationViewController = segue.destinationViewController as! DetailViewController
       let cell = sender as! MovieCollectionViewCell
-      destinationViewController.movieImage = cell.posterView.image
+      let indexPath = collectionView.indexPathForCell(cell)
+      destinationViewController.movie = filteredMovies![indexPath!.row]
     }
   }
   
@@ -149,9 +153,11 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   func makeMovieList(dictionaryList: [NSDictionary]) {
     filteredMovies = [Movie]()
     for dict in dictionaryList {
-      filteredMovies?.append(Movie(title: dict["title"] as? String,
-        description: dict["overview"] as? String,
-        posterPath: dict["poster_path"] as? String,
+      filteredMovies?.append(Movie(
+        title:             dict["title"] as? String,
+        overview:          dict["overview"] as? String,
+        rating:            dict["vote_average"] as? Double,
+        posterPath:        dict["poster_path"] as? String,
         releaseDateString: dict["release_date"] as? String))
     }
   }
@@ -160,17 +166,16 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   
   
   
-  /*
+  
   // MARK: - Search Bar Delegate
   func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-    filteredMovies = movies
+    makeMovieList(movies!)
     if searchText != "" {
-      filteredMovies = movies!.filter({(movie: NSDictionary) -> Bool in
-        (movie["title"] as! String).lowercaseString.containsString(searchText.lowercaseString)
+      filteredMovies = filteredMovies!.filter({(movie: Movie) -> Bool in
+        (movie.title).lowercaseString.containsString(searchText.lowercaseString)
+        || (movie.overview).lowercaseString.containsString(searchText.lowercaseString)
       })
     }
     collectionView.reloadData()
   }
-*/
-
 }
