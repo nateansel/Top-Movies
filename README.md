@@ -30,14 +30,13 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/WF7sVtr.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-<img src='http://i.imgur.com/5XVKKLK.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/tXbLezZ.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+The only major issue I ran into when making this app was with the refresh control. While in the UITableView, it behaved properly and sat behind my content, in the UICollectionView, it always appeared over any content I was displaying. The only workaround I was able to discover was to set the UIRefreshControl’s layer’s z position to -1, that way it will always render behind the content at a z position of 0.
 
 ## License
 
