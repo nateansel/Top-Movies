@@ -10,12 +10,13 @@ import UIKit
 
 class DetailViewController: UIViewController {
   
-  @IBOutlet weak var posterView: UIImageView!
-  @IBOutlet weak var movieTitle: UILabel!
-  @IBOutlet weak var overview: UILabel!
+  @IBOutlet weak var scrollView:  UIScrollView!
+  @IBOutlet weak var contentView: UIView!
+  @IBOutlet weak var posterView:  UIImageView!
+  @IBOutlet weak var movieTitle:  UILabel!
+  @IBOutlet weak var overview:    UILabel!
   
   var movie = Movie()
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,10 +24,18 @@ class DetailViewController: UIViewController {
     navigationItem.title! = movie.title
     posterView.setImageWithURL(movie.imageURL)
     movieTitle!.text = movie.title
-    overview!.text = movie.description
+    overview!.text = movie.overview
     
 
     // Do any additional setup after loading the view.
+  }
+  
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    
+//    contentView.frame.size.width = view.frame.size.width
+//    scrollView.contentSize = CGSizeMake(view.frame.size.width, contentView.frame.size.height)
   }
   
   

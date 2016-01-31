@@ -17,19 +17,20 @@ The following **optional** features are implemented:
 
 - [ ] User sees an error message when there's a networking error.
 - [x] Movies are displayed using a CollectionView instead of a TableView.
-- [ ] User can search for a movie.
+- [x] User can search for a movie.
 - [ ] All images fade in as they are loading.
 - [x] Customize the UI.
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] A preliminary detail view for the movies is added.
+	- [x] This view can be accessed through 3D Touch’s peek and pop.
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/5XVKKLK.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/WF7sVtr.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

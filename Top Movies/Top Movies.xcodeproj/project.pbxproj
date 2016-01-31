@@ -143,14 +143,11 @@
 		D892EE231C3F5CB60040BBAB /* Top Movies */ = {
 			isa = PBXGroup;
 			children = (
+				D8ABE5F21C5D41AF005175E4 /* View Controllers */,
+				D8ABE5F31C5D41C2005175E4 /* Views */,
+				D8ABE5F41C5D41DF005175E4 /* Data Structures */,
 				D892EE241C3F5CB60040BBAB /* AppDelegate.swift */,
-				D892EE261C3F5CB60040BBAB /* TopMoviesViewController.swift */,
 				D892EE281C3F5CB60040BBAB /* Main.storyboard */,
-				D80992CB1C557C3300A3E265 /* TopMoviesAsCollectionViewController.swift */,
-				D80992C71C557A0E00A3E265 /* MovieCollectionViewCell.swift */,
-				D892EE521C3F6D070040BBAB /* CustomTableViewCell.swift */,
-				D8D1263C1C51CD6500E5C292 /* DetailViewController.swift */,
-				D8D1263E1C51CF4300E5C292 /* Movie.swift */,
 				D892EE2B1C3F5CB60040BBAB /* Assets.xcassets */,
 				D892EE2D1C3F5CB60040BBAB /* LaunchScreen.storyboard */,
 				D892EE301C3F5CB60040BBAB /* Info.plist */,
@@ -174,6 +171,33 @@
 				D892EE461C3F5CB60040BBAB /* Info.plist */,
 			);
 			path = "Top MoviesUITests";
+			sourceTree = "<group>";
+		};
+		D8ABE5F21C5D41AF005175E4 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D80992CB1C557C3300A3E265 /* TopMoviesAsCollectionViewController.swift */,
+				D8D1263C1C51CD6500E5C292 /* DetailViewController.swift */,
+				D892EE261C3F5CB60040BBAB /* TopMoviesViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D8ABE5F31C5D41C2005175E4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D80992C71C557A0E00A3E265 /* MovieCollectionViewCell.swift */,
+				D892EE521C3F6D070040BBAB /* CustomTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D8ABE5F41C5D41DF005175E4 /* Data Structures */ = {
+			isa = PBXGroup;
+			children = (
+				D8D1263E1C51CF4300E5C292 /* Movie.swift */,
+			);
+			name = "Data Structures";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
