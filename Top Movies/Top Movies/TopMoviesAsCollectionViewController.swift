@@ -66,8 +66,13 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCollectionViewCell", forIndexPath: indexPath) as! MovieCollectionViewCell
     
-    let imageUrl = NSURL(string:"https://image.tmdb.org/t/p/w342" + filteredMovies![indexPath.row].posterPath)
-    cell.posterView.setImageWithURL(imageUrl!)
+    if let posterPath = filteredMovies?[indexPath.row].posterPath {
+      let imageUrl = NSURL(string:"https://image.tmdb.org/t/p/w342" + filteredMovies![indexPath.row].posterPath)
+      cell.posterView.setImageWithURL(imageUrl!)
+    }
+    else {
+      
+    }
     return cell
   }
   
@@ -119,7 +124,7 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
               self.movies = results
               self.makeMovieList(self.movies!)
               self.collectionView.reloadData()
-              NSLog("response: \(responseDictionary)")
+//              NSLog("response: \(responseDictionary)")
               self.hud.hide(true)
           }
         }
@@ -129,21 +134,6 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
         self.refreshControl.endRefreshing()
     });
     task.resume()
-  }
-  
-  
-  
-  
-  
-  
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    searchBar.endEditing(true)
-    if segue.identifier == "toDetailView" {
-      let destinationViewController = segue.destinationViewController as! DetailViewController
-      let cell = sender as! MovieCollectionViewCell
-      let indexPath = collectionView.indexPathForCell(cell)
-      destinationViewController.movie = filteredMovies![indexPath!.row]
-    }
   }
   
   
@@ -166,8 +156,24 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   
   
   
+  // MARK: Animations
   
-  // MARK: - Search Bar Delegate
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    searchBar.endEditing(true)
+    if segue.identifier == "toDetailView" {
+      let destinationViewController = segue.destinationViewController as! DetailViewController
+      let cell = sender as! MovieCollectionViewCell
+      let indexPath = collectionView.indexPathForCell(cell)
+      destinationViewController.movie = filteredMovies![indexPath!.row]
+    }
+  }
+  
+  
+  
+  
+  
+  
+  // MARK: Search Bar Delegate
   func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
     makeMovieList(movies!)
     if searchText != "" {
