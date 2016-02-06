@@ -11,7 +11,6 @@
         <scene sceneID="HZO-xk-Vxp">
             <objects>
                 <navigationController storyboardIdentifier="navController" id="I6q-Eb-KhB" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="d4P-fp-Gy2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -273,7 +272,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="laJ-sC-B6z">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="646"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="M5W-oe-eqS">
                                     <size key="itemSize" width="158" height="238"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -315,7 +314,7 @@
                         <constraints>
                             <constraint firstItem="laJ-sC-B6z" firstAttribute="leading" secondItem="ctb-9x-RAg" secondAttribute="leading" id="A60-Gj-Yt7"/>
                             <constraint firstAttribute="trailing" secondItem="laJ-sC-B6z" secondAttribute="trailing" id="UXw-J1-4Ft"/>
-                            <constraint firstItem="QKo-i0-qhI" firstAttribute="top" secondItem="laJ-sC-B6z" secondAttribute="bottom" id="eue-L4-2B3"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="laJ-sC-B6z" secondAttribute="bottom" constant="-46" id="rwf-Ev-YpR"/>
                             <constraint firstItem="laJ-sC-B6z" firstAttribute="top" secondItem="ctb-9x-RAg" secondAttribute="top" id="ue9-t9-Ncc"/>
                         </constraints>
                     </view>

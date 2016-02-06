@@ -180,6 +180,8 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
       let cell = sender as! MovieCollectionViewCell
       let indexPath = collectionView.indexPathForCell(cell)
       destinationViewController.movie = filteredMovies![indexPath!.row]
+      
+//      destinationViewController.hidesBottomBarWhenPushed = true
     }
   }
   

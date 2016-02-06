@@ -25,7 +25,7 @@ class DetailViewController: UIViewController {
     
     navigationItem.title? = movie.title
     navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-    navigationController?.tabBarController?.tabBarItem
+    tabBarController?.tabBar.hidden = true
     
     posterView.setImageWithURL(movie.imageURL)
     posterView.clipsToBounds = true
@@ -42,6 +42,11 @@ class DetailViewController: UIViewController {
     print(displacementView.frame.size.height)
 
     // Do any additional setup after loading the view.
+  }
+  
+  override func viewWillDisappear(animated: Bool) {
+    super.viewWillDisappear(animated)
+    tabBarController?.tabBar.hidden = false
   }
   
   
