@@ -36,7 +36,6 @@ class DetailViewController: UIViewController {
     // Set up the displacement view (this pushes down the blur view)
     displacementView.backgroundColor = UIColor.clearColor()
     displacementView.frame.size.height = view.frame.size.height / 2
-    print(displacementView.frame.size.height)
     if blurView.frame.size.height < view.frame.size.height / 2 {
       displacementView.frame.size.height = view.frame.size.height - blurView.frame.size.height
     }

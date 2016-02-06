@@ -17,10 +17,11 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   @IBOutlet weak var collectionView: UICollectionView!
   var searchBar: UISearchBar!
   
-  var movies = [NSDictionary]?()
+  var endPoint:        String!
+  var movies         = [NSDictionary]?()
   var filteredMovies = [Movie]?()
-  var refreshControl: UIRefreshControl!
-  var hud:            MBProgressHUD!
+  var refreshControl:  UIRefreshControl!
+  var hud:             MBProgressHUD!
   
   
   // MARK: - Methods
@@ -38,6 +39,8 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
     collectionView.delegate   = self
     searchBar.delegate        = self
     
+    collectionView.allowsMultipleSelection = true
+    
     refreshControl = UIRefreshControl()
     refreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged)
     refreshControl.layer.zPosition = -1
@@ -52,6 +55,18 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   
   
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if let indexPaths = collectionView.indexPathsForSelectedItems() {
+      for indexPath in indexPaths {
+        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+      }
+    }
+  }
+  
+  
+  
   
   
   override func didReceiveMemoryWarning() {
@@ -62,12 +77,12 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   
   
   
-  // MARK: Table view overrides
+  // MARK: Collection view overrides
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCollectionViewCell", forIndexPath: indexPath) as! MovieCollectionViewCell
     
     if let posterPath = filteredMovies?[indexPath.row].posterPath {
-      let imageUrl = NSURL(string:"https://image.tmdb.org/t/p/w342" + filteredMovies![indexPath.row].posterPath)
+      let imageUrl = NSURL(string:"https://image.tmdb.org/t/p/w342" + posterPath)
       cell.posterView.setImageWithURL(imageUrl!)
     }
     else {
@@ -107,7 +122,7 @@ class TopMoviesAsCollectionViewController: UIViewController, UICollectionViewDat
   ///
   func refreshData() {
     let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-    let url = NSURL(string:"https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+    let url = NSURL(string:"https://api.themoviedb.org/3/movie/\(endPoint)?api_key=\(apiKey)")
     let request = NSURLRequest(URL: url!)
     let session = NSURLSession(
       configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
