@@ -9,12 +9,13 @@
 import Foundation
 
 class Movie {
-  var title:       String
-  var overview:    String
-  var posterPath:  String
-  var rating:      Double
-  var releaseDate: NSDate
-  var imageURL:    NSURL
+  var title:         String
+  var overview:      String
+  var posterPath:    String
+  var rating:        Double
+  var releaseDate:   NSDate
+  var imageURL:      NSURL
+  var largeImageURL: NSURL
   
   
   init(title: String?, overview: String?, rating: Double?, posterPath: String?, releaseDateString: String?) {
@@ -22,7 +23,8 @@ class Movie {
     self.overview    = overview   ?? ""
     self.posterPath  = posterPath ?? ""
     self.rating      = rating     ?? 0
-    imageURL         = NSURL(string:"https://image.tmdb.org/t/p/w342" + self.posterPath) ?? NSURL()
+    imageURL         = NSURL(string: "https://image.tmdb.org/t/p/w342" + self.posterPath) ?? NSURL()
+    largeImageURL    = NSURL(string: "https://image.tmdb.org/t/p/original" + self.posterPath) ?? NSURL()
     self.releaseDate = NSDate()
     if let s = releaseDateString {
       let formatter = NSDateFormatter()

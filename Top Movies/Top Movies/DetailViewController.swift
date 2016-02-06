@@ -28,6 +28,7 @@ class DetailViewController: UIViewController {
     tabBarController?.tabBar.hidden = true
     
     posterView.setImageWithURL(movie.imageURL)
+    posterView.setImageWithURL(movie.largeImageURL)
     posterView.clipsToBounds = true
     movieTitle?.text = movie.title
     overview?.text = movie.overview
